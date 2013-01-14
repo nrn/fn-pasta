@@ -52,10 +52,6 @@ function fnPasta (opts) {
     }
   }
 
-  function all (fn) {
-    return p.arrify(arguments).reduce(fn)
-  }
-
   // Idea taken from Eloquent JavaScript
   var operators =
     // Comparison
