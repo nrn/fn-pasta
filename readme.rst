@@ -1,5 +1,5 @@
 ===============================================================================
-Pasta
+Functional Pasta
 ===============================================================================
 
 A collection of functional functions that I have found myself copy pastaing around.

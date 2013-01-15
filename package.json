@@ -1,9 +1,9 @@
 { "name": "fn-pasta"
-, "version": "0.0.1"
+, "version": "0.0.2"
 , "author": "Nick Niemeir <nick.niemeir@gmail.com> (http://nrn.io)"
 , "main": "fn-pasta.js"
 , "scripts": { "test": "for f in ./t/*.js; do node $f; done" }
-, "dependencies": { "pasta": "*" }
+, "dependencies": { "gen-pasta": "*" }
 , "devDependencies": { "tape": "*" }
 , "engines": { "node": ">0.6" }
 , "repository":

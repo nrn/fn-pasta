@@ -1,5 +1,5 @@
 // pasta.js
-var p = require('pasta')()
+var p = require('gen-pasta')()
 
 function fnPasta (opts) {
   function comp (args) {
