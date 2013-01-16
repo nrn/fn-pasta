@@ -1,5 +1,5 @@
 { "name": "fn-pasta"
-, "version": "0.0.2"
+, "version": "0.0.3"
 , "author": "Nick Niemeir <nick.niemeir@gmail.com> (http://nrn.io)"
 , "main": "fn-pasta.js"
 , "scripts": { "test": "for f in ./t/*.js; do node $f; done" }

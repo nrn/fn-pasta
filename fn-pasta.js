@@ -16,7 +16,7 @@ function fnPasta (opts) {
     args.shift() // remove the function
     return function () {
       var innerArgs = p.arrify(arguments)
-      return fn.apply(null, args.map(function (arg) {
+      return fn.apply(this, args.map(function (arg) {
           if (arg == null) return innerArgs.shift()
           return arg
         }).concat(innerArgs)
@@ -84,9 +84,7 @@ function fnPasta (opts) {
 
   var op = casify(operators)
 
-  function d (arg) {
-    return arg
-  }
+  var d = op('')
 
   function get (key) {
     return function (obj) {
