@@ -3,7 +3,7 @@ var p = require('gen-pasta')()
 
 function fnPasta (opts) {
   function comp (args) {
-    if (!Array.isArray(args)) args = p.arrify(arguments)
+    if (!Array.isArray(args)) args = p.slice(arguments)
     return function (input) {
       return args.reduceRight(function (last, cur) {
         return cur(last)
@@ -12,15 +12,25 @@ function fnPasta (opts) {
   }
 
   function partial (fn) {
-    var args = p.arrify(arguments)
-    args.shift() // remove the function
+    var args = p.slice(arguments, 1)
     return function () {
-      var innerArgs = p.arrify(arguments)
+      var innerArgs = p.slice(arguments)
       return fn.apply(this, args.map(function (arg) {
           if (typeof arg === 'undefined') return innerArgs.shift()
           return arg
         }).concat(innerArgs)
       )
+    }
+  }
+
+  function curry (fn, times) {
+    var args = []
+      , self = this
+    if (!(times >= 2)) times = 2
+    return function currying (arg) {
+      args.push(arg)
+      if (args.length === times) return fn.apply(self, args)
+      return currying
     }
   }
 
@@ -33,7 +43,7 @@ function fnPasta (opts) {
   function limit (num) {
     return function (fn) {
       return function () {
-        return fn.apply(null, p.arrify(arguments).slice(0, num))
+        return fn.apply(null, p.slice(arguments).slice(0, num))
       }
     }
   }
@@ -45,7 +55,7 @@ function fnPasta (opts) {
       var val = obj[cas]
       if (typeof val === 'undefined') {
         if (typeof def !== 'undefined') val = def(cas)
-        else if (typeof obj._default !== 'undefined') val = obj._default
+        else if (typeof obj._default === 'string') val = obj[obj._default]
         else val = obj['default']
       }
       return val
@@ -80,11 +90,21 @@ function fnPasta (opts) {
     , '!': function (a) { return !a }
     // Identity
     , '': function (a) { return a }
+    // Default
+    , '_default': ''
     }
 
   var op = casify(operators)
 
   var d = op('')
+
+  function all (fn) {
+    fn = args(2)(fn)
+    return function () {
+      var args = p.slice(arguments)
+      return args.reduce(fn)
+    }
+  }
 
   function get (key) {
     return function (obj) {
@@ -100,6 +120,8 @@ function fnPasta (opts) {
     , args: args
     , op: op
     , partial: partial
+    , curry: curry
+    , all: all
     }
 
 }

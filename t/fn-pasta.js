@@ -5,24 +5,29 @@ test('General', function (t) {
   var obj =
       { foo: 'bar'
       , asdf: 42
-      , _default: 'blah'
+      , default: 'blah'
+      }
+    , strDef =
+      { foo: 'bar'
+      , asdf: 42
+      , _default: 'asdf'
       }
     , caseObj = p.casify(obj)
+    , strDefCas = p.casify(strDef)
     , otherCase = p.casify(obj, function () {return 'doh'})
-
-  function add (a, b) {
-    return a + b
-  }
+    , add = p.op('+')
+    , sum = p.all(p.op('+'))
 
   t.equal(p.d('asdf'), 'asdf', 'Ident function')
 
   t.equal(caseObj('foo'), 'bar', 'Existing case')
-  t.equal(caseObj('weeeeee'), 'blah', 'Non-extant case')
-  t.equal(otherCase('notThere'), 'doh', 'Non-extant explicit default')
+  t.equal(strDefCas('n/a'), 42, 'Default property')
+  t.equal(caseObj('weeeeee'), 'blah', 'Default value')
+  t.equal(otherCase('notThere'), 'doh', 'Default function')
 
   t.equal(p.one(add)('a', 'b'), 'aundefined', 'One uses only the first arg')
-  t.equal(p.args(4)(function (a, b, c, d, e) { return e })(1, 2, 3, 4, 5, 6)
-      , undefined
+  t.equal(p.args(4)(sum)(1, 2, 3, 4, 5, 6)
+      , 10
       , 'Arg limit using default/limit fn')
 
   var argComped = p.comp(JSON.stringify, Math.sqrt, parseInt)
@@ -40,6 +45,10 @@ test('General', function (t) {
   t.equal(p.op('')(12), 12, 'identity operator')
 
   t.equal(p.partial(add, undefined, 'b')('c'), 'cb','Partial application')
-  t.end()
 
+
+  t.equal(p.curry(add)(1)(1), 2, 'Curry default')
+  t.equal(p.curry(sum, 5)(1)(2)(3)(4)(5), 15, 'Curry 5 times')
+
+  t.end()
 })

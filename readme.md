@@ -11,12 +11,17 @@ comp(arr)
 Turn array (or arguments) of functions into a single function
 that feeds the return value of one into the next.
 
-partial(fn, [args, ...])
+partial(fn[, args, ...])
 ------------------------
 
 Return fn with arguments applied. Passing undefined will leave a hole
 that will be filled with arguments from the second fn call before
 the rest are appended to the arguments list.
+
+curry(fn[, times])
+------------------
+Return a function that takes a single argument *times* number of times,
+and then calls fn in the context it was called in. *times* defaults/min is 2.
 
 limit(num)
 ----------
@@ -44,4 +49,10 @@ get(key)
 --------
 
 Returns a function that gets key from the object it is called on.
+
+all(fn)
+-------
+
+Return a function that reduces all of it's arguments over fn. fn gets passed
+two arguments at a time.
 
