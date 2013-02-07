@@ -14,7 +14,9 @@ that feeds the return value of one into the next.
 partial(fn, [args, ...])
 ------------------------
 
-Return fn with arguments applied. Blank spots are held for nulls.
+Return fn with arguments applied. Passing undefined will leave a hole
+that will be filled with arguments from the second fn call before
+the rest are appended to the arguments list.
 
 limit(num)
 ----------

@@ -17,7 +17,7 @@ function fnPasta (opts) {
     return function () {
       var innerArgs = p.arrify(arguments)
       return fn.apply(this, args.map(function (arg) {
-          if (arg == null) return innerArgs.shift()
+          if (typeof arg === 'undefined') return innerArgs.shift()
           return arg
         }).concat(innerArgs)
       )
@@ -25,7 +25,7 @@ function fnPasta (opts) {
   }
 
   var numOfArgs =
-    { '1': function (fn) { return function (arg) { return fn(arg) } }
+    { '1': function (fn) { return function (a) { return fn(a) } }
     , '2': function (fn) { return function (a, b) { return fn(a, b) } }
     , '3': function (fn) { return function (a, b, c) { return fn(a, b, c) } }
     }

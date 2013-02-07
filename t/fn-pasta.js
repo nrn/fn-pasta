@@ -14,8 +14,6 @@ test('General', function (t) {
     return a + b
   }
 
-  t.plan(15)
-
   t.equal(p.d('asdf'), 'asdf', 'Ident function')
 
   t.equal(caseObj('foo'), 'bar', 'Existing case')
@@ -41,6 +39,7 @@ test('General', function (t) {
   t.equal(p.op('!')(true), false, 'logic operators')
   t.equal(p.op('')(12), 12, 'identity operator')
 
-  t.equal(p.partial(add, null, 'b')('c'), 'cb','Partial application')
+  t.equal(p.partial(add, undefined, 'b')('c'), 'cb','Partial application')
+  t.end()
 
 })
