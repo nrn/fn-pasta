@@ -35,6 +35,13 @@ Return a function that takes a case and checks to see if it is in obj.
 If not use the default, if not use the \_default property of the object,
 if not use the default property of the object.
 
+memo(fn[, cache])
+-----------------
+
+Return a memoized version of fn, with \_cache attached. Can provide
+an optional starting cache (be careful, can be used to provide incorrect
+answers to function calls). Cache keys are the stringified array of arguments.
+
 op(operator)
 ------------
 

@@ -46,9 +46,23 @@ test('General', function (t) {
 
   t.equal(p.partial(add, undefined, 'b')('c'), 'cb','Partial application')
 
-
   t.equal(p.curry(add)(1)(1), 2, 'Curry default')
   t.equal(p.curry(sum, 5)(1)(2)(3)(4)(5), 15, 'Curry 5 times')
+
+  var called = 0
+  var memoAdd = p.memo(function (a, b) {
+    called++
+    t.same(called, 1, 'Only called once')
+    return add(a, b)
+  })
+  var memoSum = p.memo(sum, { '["broken",2]': 'Surprise!' })
+
+  t.same(memoAdd(1, 2), 3, 'First memo call')
+  t.same(memoAdd(1, 2), 3, 'Second memo call')
+  t.same(memoAdd(1, 2), 3, 'Third memo call')
+  t.same(memoSum('broken', 2), 'Surprise!', 'Provided cache object')
+  t.same(memoSum(1, 1), 2, 'Avoid cache object')
+  t.same(memoSum._cache, { '["broken",2]': 'Surprise!', '[1,1]': 2 }, 'Check cache')
 
   t.end()
 })

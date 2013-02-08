@@ -34,6 +34,16 @@ function fnPasta (opts) {
     }
   }
 
+  function memo (fn, cache) {
+    cache = memoed._cache = cache || {}
+    function memoed () {
+      var args = JSON.stringify(p.slice(arguments))
+      if (!(args in cache)) cache[args] = fn.apply(this, arguments)
+      return cache[args]
+    }
+    return memoed
+  }
+
   var numOfArgs =
     { '1': function (fn) { return function (a) { return fn(a) } }
     , '2': function (fn) { return function (a, b) { return fn(a, b) } }
@@ -43,7 +53,7 @@ function fnPasta (opts) {
   function limit (num) {
     return function (fn) {
       return function () {
-        return fn.apply(null, p.slice(arguments).slice(0, num))
+        return fn.apply(null, p.slice(arguments, 0, num))
       }
     }
   }
@@ -122,6 +132,8 @@ function fnPasta (opts) {
     , partial: partial
     , curry: curry
     , all: all
+    , memo: memo
+    , memoize: memo
     }
 
 }
