@@ -39,7 +39,7 @@ bench.add('Fast Memo', function () {
 }).add('My Memo', function () {
   p.memo(fib)(20)
 }).on('cycle', function (e) {
-  console.log(JSON.stringify(e.target, null, 2))
+  console.log(JSON.stringify(e.target.count, null, 2))
 }).on('complete', function () {
-  console.log('Done')
+  console.log('Fastest is ' + this.filter('fastest').pluck('name'))
 }).run({ async: true })
