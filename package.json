@@ -4,7 +4,10 @@
 , "main": "fn-pasta.js"
 , "scripts": { "test": "for f in ./t/*.js; do node $f; done" }
 , "dependencies": { "gen-pasta": "*" }
-, "devDependencies": { "tape": "*" }
+, "devDependencies":
+  { "tape": "*"
+  , "benchmark": "*"
+  }
 , "engines": { "node": ">0.6" }
 , "repository":
   { "type": "git"
