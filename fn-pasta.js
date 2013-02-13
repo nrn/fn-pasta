@@ -36,7 +36,7 @@ function fnPasta (opts) {
 
   function memo (fn, cache) {
     function memoed () {
-      fn._cache || (memoed.cache = fn._cache = {})
+      fn._cache || (memoed.cache = fn._cache = cache || {})
       var args = JSON.stringify(p.slice(arguments))
       if (args in fn._cache) return fn._cache[args]
       return fn._cache[args] = fn.apply(this, arguments)

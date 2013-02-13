@@ -62,7 +62,7 @@ test('General', function (t) {
   t.same(memoAdd(1, 2), 3, 'Third memo call')
   t.same(memoSum('broken', 2), 'Surprise!', 'Provided cache object')
   t.same(memoSum(1, 1), 2, 'Avoid cache object')
-  t.same(memoSum._cache, { '["broken",2]': 'Surprise!', '[1,1]': 2 }, 'Check cache')
+  t.same(memoSum.cache, { '["broken",2]': 'Surprise!', '[1,1]': 2 }, 'Check cache')
 
   t.end()
 })
