@@ -108,8 +108,6 @@ function fnPasta (opts) {
 
   var op = casify(operators)
 
-  var d = op('')
-
   function all (fn) {
     fn = args(2)(fn)
     return function () {
@@ -126,7 +124,7 @@ function fnPasta (opts) {
 
   return { get: get
     , casify: casify
-    , d: d
+    , d: op('')
     , comp: comp
     , one: args(1)
     , args: args
