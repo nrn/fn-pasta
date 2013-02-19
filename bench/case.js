@@ -38,7 +38,6 @@ bench.add('Casify', function () {
   for(var i = 1; i<12; i++) {
     num += getNum(i)
   }
-  if (debug) console.log('asdf')
 }).add('Switch Statement', function () {
   var num = 0
   for(var i = 1; i<12; i++) {
