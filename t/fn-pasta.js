@@ -46,7 +46,11 @@ test('General', function (t) {
 
   t.equal(p.partial(add, undefined, 'b')('c'), 'cb','Partial application')
 
-  t.equal(p.curry(add)(1)(1), 2, 'Curry default')
+  function addd (a, b, c) {
+    return a + b +c
+  }
+  t.equal(p.curry(addd)(1)(2)(3), 6, 'Curry number of args defined')
+  t.equal(p.curry(sum)(1)(2), 3, 'Curry twice for undefined args')
   t.equal(p.curry(sum, 5)(1)(2)(3)(4)(5), 15, 'Curry 5 times')
 
   var called = 0
