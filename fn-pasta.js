@@ -25,13 +25,14 @@ function fnPasta (opts) {
 
   function curry (fn, times) {
     var self = this
-      , args = []
-
     if (!(times >= 2)) times = (fn.length > 1 ? fn.length : 2)
-    return function currying (arg) {
+    return function currying (arg, args) {
+      args || (args = [])
       args.push(arg)
       if (args.length === times) return fn.apply(self, args)
-      return currying
+      return function (arg) {
+        return currying(arg, args)
+      }
     }
   }
 
