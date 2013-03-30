@@ -23,7 +23,8 @@ the rest are appended to the arguments list.
 curry(fn[, times])
 ------------------
 Return a function that takes a single argument *times* number of times,
-and then calls fn in the context it was called in. *times* defaults/min is 2.
+and then calls fn in the context it was called in. *times* min is 2, defaults
+to the number of arguments specified.
 
 limit(num)
 ----------
