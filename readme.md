@@ -5,7 +5,7 @@ A collection of functional functions that I have found myself copy pastaing arou
 
 I am trying to separate the pasta into useful strands.
 
-[![browser support](http://ci.testling.com/nrn/fn-pasta.png)](http://ci.testling.com/nrn/fn-pasta)
+[![browser support](https://ci.testling.com/nrn/fn-pasta.png)](https://ci.testling.com/nrn/fn-pasta)
 
 comp(arr)
 ---------
